@@ -32,6 +32,7 @@
     // Profile
     $user->firstName = $data->firstName;
     $user->lastName = $data->lastName;
+    $user->detail = $data->detail;
     $user->birthDay = $data->birthDay;
 
     if ($user->create()) 

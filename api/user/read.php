@@ -33,7 +33,12 @@
                 'username' => $username,
                 'password' => $password,
                 'email' => $email,
-                'userType' => $userType
+                'userType' => $userType,
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'detail' => $detail,
+                'birthDay' => $birthDay,
+                'isActive' => $isActive,
             );
 
             // Category to data

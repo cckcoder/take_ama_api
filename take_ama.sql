@@ -18,16 +18,17 @@ CREATE TABLE `user_type` (
 INSERT INTO `user_type` (`id`, `type`) VALUES
 (1, 'elderly'),
 (2, 'caretaker'),
-(3, 'admin')
+(3, 'admin');
 
 CREATE TABLE `profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
+  `detail` TEXT NOT NULL,
   `birthDay` int(5) NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `lastUpdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `isActive` int(1) NOT NULL,
+  `isActive` int(1) NOT NULL DEFAULT 1,
   `startWorkDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `endWorkDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
