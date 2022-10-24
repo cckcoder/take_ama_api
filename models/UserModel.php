@@ -4,6 +4,7 @@
         // DB config
         private $conn;
         private $table = 'user';
+        private $tb_profile = 'profile';
 
         // User Properties
         public $id;
@@ -127,6 +128,7 @@
             if ($stmt->execute())
             {
                 $user_id = $this->conn->lastInsertId();
+                $this->id = $user_id;
                 if ($this->profile($user_id));
                 return true;
             }
@@ -172,34 +174,34 @@
             }
         }
 
-        public function update()
+        public function update_profile()
         {
             // Create query
-            $query = "UPDATE {$this->table}
+            $query = "UPDATE {$this->tb_profile}
                 SET
-                    title = :title,
-                    body = :body,
-                    author = :author,
-                    category_id = :category_id
+                    firstName = :firstName,
+                    lastName = :lastName,
+                    detail = :detail,
+                    birthDay = :birthDay
                 WHERE
-                    id = :id";
+                    user_id = :user_id";
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
 
             // Clean Data
-            $this->title = htmlspecialchars(strip_tags($this->title));
-            $this->body = htmlspecialchars(strip_tags($this->body));
-            $this->author = htmlspecialchars(strip_tags($this->author));
-            $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+            $this->firstName = htmlspecialchars(strip_tags($this->firstName));
+            $this->lastName = htmlspecialchars(strip_tags($this->lastName));
+            $this->detail = htmlspecialchars(strip_tags($this->detail));
+            $this->birthDay = htmlspecialchars(strip_tags($this->birthDay));
             $this->id = htmlspecialchars(strip_tags($this->id));
 
             // Bind data
-            $stmt->bindParam(':title', $this->title);
-            $stmt->bindParam(':body', $this->body);
-            $stmt->bindParam(':author', $this->author);
-            $stmt->bindParam(':category_id', $this->category_id);
-            $stmt->bindParam(':id', $this->id);
+            $stmt->bindParam(':firstName', $this->firstName);
+            $stmt->bindParam(':lastName', $this->lastName);
+            $stmt->bindParam(':detail', $this->detail);
+            $stmt->bindParam(':birthDay', $this->birthDay);
+            $stmt->bindParam(':user_id', $this->id);
 
             // Execute query
             if ($stmt->execute())
@@ -216,7 +218,33 @@
         // Delete Post
         public function delete()
         {
-            $query = "DELETE FROM {$this->table} WHERE id = :id";
+            // Delete profile first.
+            if ($this->delete_profile())
+            {
+                $query = "DELETE FROM {$this->table} WHERE id = :id";
+                // Prepare statement
+                $stmt = $this->conn->prepare($query);
+                // Clean data
+                $this->id = htmlspecialchars(strip_tags($this->id));
+                // Bind data
+                $stmt->bindParam(':id', $this->id);
+                // Execute query
+                if ($stmt->execute())
+                {
+                    return true;
+                }
+                else
+                {
+                    print_r("Error: {$stmt->error}");
+                    return false;
+                }
+            }
+        }
+
+        public function delete_profile()
+        {
+            // Delete profile first.
+            $query = "DELETE FROM {$this->tb_profile} WHERE user_id = :id";
             // Prepare statement
             $stmt = $this->conn->prepare($query);
             // Clean data

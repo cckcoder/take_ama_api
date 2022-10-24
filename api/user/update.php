@@ -2,7 +2,7 @@
     // Headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Methods: PUT');
     header(
         'Access-Control-Allow-Headers: Access-Control-Allow-Headers,
         Content-Type,
@@ -24,41 +24,23 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
-    $user->username = $data->username;
-    $user->password = password_hash($data->password, PASSWORD_BCRYPT);
-    $user->email = $data->email;
-    $user->userType = $data->userType;
-
-    // Profile
+    // Set User ID
+    $user->id = $data->user_id;
+    // Set User Details
     $user->firstName = $data->firstName;
     $user->lastName = $data->lastName;
     $user->detail = $data->detail;
     $user->birthDay = $data->birthDay;
 
-    if ($user->create()) 
+    if ($user->update_profile())
     {
-        $user->read_single();
-        $user_arr = array(
-            'id' => $user->id,
-            'username' => $user->username,
-            'email' => $user->email,
-            'userType' => $user->userType,
-            'firstName' => $user->firstName,
-            'lastName' => $user->lastName,
-            'lastName' => $user->detail,
-            'birthDay' => $user->birthDay,
-            'isActive' => $user->isActive
-        );
         echo json_encode(
-            array(
-                'message' => 'User Create',
-                'data' => $user_arr
-            )
+            array('message' => 'Profile Update')
         );
     }
     else
     {
         echo json_encode(
-            array('message' => 'User Not Create')
+            array('message' => 'Profile Not Update')
         );
     }
