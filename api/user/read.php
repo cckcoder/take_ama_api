@@ -31,7 +31,6 @@
             $user = array(
                 'id' => $id,
                 'username' => $username,
-                'password' => $password,
                 'email' => $email,
                 'userType' => $userType,
                 'firstName' => $firstName,

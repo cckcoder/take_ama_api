@@ -262,4 +262,27 @@
                 return false;
             }
         }
+
+        public function login()
+        {
+            $query = "SELECT * FROM user WHERE username = ?";
+            $stmt = $this->conn->prepare($query);
+            // Bind ID
+            $stmt->bindParam(1, $this->username);
+            $stmt->execute();
+            $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user_data)
+            {
+                if (password_verify($this->password, $user_data['password']))
+                {
+                    $this->id = $user_data['id'];
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
