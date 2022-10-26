@@ -47,3 +47,17 @@ CREATE TABLE `order_transection` (
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `order_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` int(5) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `order_type` (`id`, `status`, `description`) VALUES
+(1, 0, 'pending'),
+(2, 1, 'active'),
+(3, 2, 'complete'),
+(4, 9, 'cancel');

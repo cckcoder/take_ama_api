@@ -37,7 +37,7 @@
         );
         echo json_encode(
             array(
-                'message' => 'User Create',
+                'message' => 'User login sucessful!',
                 'data' => $user_arr
             )
         );
