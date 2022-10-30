@@ -37,8 +37,8 @@
             LEFT JOIN profile as p2
                 ON p2.user_id = ot.careTakerId
             LEFT JOIN order_type as o
-                ON o.id = ot.status
-            WHERE o.id IN (0, 1)";
+                ON o.status = ot.status
+            WHERE o.status IN (0, 1)";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
@@ -76,8 +76,8 @@
                 LEFT JOIN profile AS p2
                     ON p2.user_id = ot.careTakerId
                 LEFT JOIN order_type AS o
-                    ON o.id = ot.status
-                WHERE o.id IN (0, 1)
+                    ON o.status = ot.status
+                WHERE o.status IN (0, 1)
                     AND {$selection} = :userId";
 
             $stmt = $this->conn->prepare($query);
@@ -100,5 +100,40 @@
             {
                 $this->id = null;
             }
+        }
+
+        public function create()
+        {
+            $query = "INSERT INTO {$this->table}
+                SET
+                    careTakerId = :careTakerId ,
+                    hours = :hours,
+                    price = :price,
+                    amaId = :amaId";
+
+            $stmt = $this->conn->prepare($query);
+
+            $this->careTakerId = htmlspecialchars(strip_tags($this->careTakerId));
+            $this->hours = htmlspecialchars(strip_tags($this->hours));
+            $this->price = htmlspecialchars(strip_tags($this->price));
+            $this->status = htmlspecialchars(strip_tags($this->status));
+            $this->amaId = htmlspecialchars(strip_tags($this->amaId));
+
+            $stmt->bindParam(':careTakerId', $this->careTakerId);
+            $stmt->bindParam(':hours', $this->hours);
+            $stmt->bindParam(':price', $this->price);
+            $stmt->bindParam(':amaId', $this->amaId);
+
+            if ($stmt->execute())
+            {
+                return true;
+
+            }
+            else
+            {
+                print_r("Error Order: {$stmt->error}");
+                return false;
+            }
+
         }
     }
