@@ -60,6 +60,20 @@
             $this->order_by_id($selection);
         }
 
+        public function read_order()
+        {
+            $query = "SELECT 
+                status,
+                description
+            FROM take_ama.order_type";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+
+            return $stmt;
+
+        }
+
         public function order_by_id($selection)
         {
             $query = "SELECT
