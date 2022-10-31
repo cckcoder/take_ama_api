@@ -136,4 +136,30 @@
             }
 
         }
+
+        public function update_order()
+        {
+            $query = "UPDATE {$this->table}
+                SET status = :status
+                WHERE id = :orderId";
+
+            $stmt = $this->conn->prepare($query);
+
+            $this->id = htmlspecialchars(strip_tags($this->id));
+            $this->status = htmlspecialchars(strip_tags($this->status));
+
+            // Bind data
+            $stmt->bindParam(':status', $this->status);
+            $stmt->bindParam(':orderId', $this->id);
+
+            if ($stmt->execute())
+            {
+                return true;
+            }
+            else
+            {
+                print_r("Error: {$stmt->error}");
+                return false;
+            }
+        }
     }
