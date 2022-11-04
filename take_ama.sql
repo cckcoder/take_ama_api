@@ -42,7 +42,7 @@ CREATE TABLE `order_transection` (
   `careTakerId` int(11) NOT NULL,
   `hours` int(5) NOT NULL,
   `price` DECIMAL(10, 2) NOT NULL,
-  `status` int(5) NOT NULL,
+  `status` int(5) NOT NULL DEFAULT 0,
   `amaId` int(11) NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
