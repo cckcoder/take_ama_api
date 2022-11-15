@@ -31,7 +31,7 @@
             'userType' => $user->userType,
             'firstName' => $user->firstName,
             'lastName' => $user->lastName,
-            'lastName' => $user->detail,
+            'detail' => $user->detail,
             'birthDay' => $user->birthDay,
             'isActive' => $user->isActive
         );
