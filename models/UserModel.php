@@ -285,4 +285,15 @@
                 }
             }
         }
+
+        public function user_count()
+        {
+            $query = "SELECT count(id) AS user_count FROM user";
+            $stmt = $this->conn->prepare($query);
+
+            $stmt->execute();
+            $user_count = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $user_count;
+        }
     }
