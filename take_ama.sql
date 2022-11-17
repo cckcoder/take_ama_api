@@ -61,3 +61,12 @@ INSERT INTO `order_type` (`id`, `status`, `description`) VALUES
 (2, 1, 'active'),
 (3, 2, 'complete'),
 (4, 9, 'cancel');
+
+CREATE TABLE `rating` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `star` float(3, 1) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
