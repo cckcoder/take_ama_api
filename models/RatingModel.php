@@ -36,4 +36,15 @@
                 return false;
             }
         }
+
+        public function avg_rating()
+        {
+            $query = "SELECT ROUND(AVG(star), 1) as star FROM rating";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row["star"];
+        }
     }
