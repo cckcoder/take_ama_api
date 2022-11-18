@@ -64,4 +64,34 @@
                 return false;
             }
         }
+
+        public function update()
+        {
+            $query = "UPDATE {$this->table}
+                SET
+                    title = :title,
+                    description = :description
+                WHERE
+                    id = :id";
+
+            $stmt = $this->conn->prepare($query);
+
+
+            $this->title = htmlspecialchars(strip_tags($this->title));
+            $this->description = htmlspecialchars(strip_tags($this->description));
+
+            $stmt->bindParam(':id', $this->id);
+            $stmt->bindParam(':title', $this->title);
+            $stmt->bindParam(':description', $this->description);
+
+            if ($stmt->execute())
+            {
+                return true;
+            }
+            else
+            {
+                print_r("Error: {$stmt->error}");
+                return false;
+            }
+        }
     }
