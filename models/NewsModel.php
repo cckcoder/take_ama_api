@@ -39,4 +39,29 @@
                 $this->description = $row['description'];
             }
         }
+
+        public function create()
+        {
+            $query = "INSERT INTO {$this->table}
+                SET
+                    title = :title,
+                    description = :description";
+            
+            $stmt = $this->conn->prepare($query);
+
+            $this->title = htmlspecialchars(strip_tags($this->title));
+            $this->title = htmlspecialchars(strip_tags($this->description));
+
+            $stmt->bindParam(':title', $this->title);
+            $stmt->bindParam(':description', $this->description);
+
+            if ($stmt->execute())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
