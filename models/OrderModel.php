@@ -12,6 +12,11 @@
         public $price;
         public $status;
         public $amaId;
+        public $amaLat;
+        public $amaLong;
+        public $careTaker;
+        public $amaName;
+        public $orderStatus;
         
         public $userType;
         public $userId;
@@ -123,7 +128,9 @@
                     careTakerId = :careTakerId ,
                     hours = :hours,
                     price = :price,
-                    amaId = :amaId";
+                    amaId = :amaId,
+                    amaLat = :amaLat,
+                    amaLong = :amaLong";
 
             $stmt = $this->conn->prepare($query);
 
@@ -132,11 +139,15 @@
             $this->price = htmlspecialchars(strip_tags($this->price));
             $this->status = htmlspecialchars(strip_tags($this->status));
             $this->amaId = htmlspecialchars(strip_tags($this->amaId));
+            $this->amaLat = htmlspecialchars(strip_tags($this->amaLat));
+            $this->amaLong = htmlspecialchars(strip_tags($this->amaLong));
 
             $stmt->bindParam(':careTakerId', $this->careTakerId);
             $stmt->bindParam(':hours', $this->hours);
             $stmt->bindParam(':price', $this->price);
             $stmt->bindParam(':amaId', $this->amaId);
+            $stmt->bindParam(':amaLat', $this->amaLat);
+            $stmt->bindParam(':amaLong', $this->amaLong);
 
             if ($stmt->execute())
             {

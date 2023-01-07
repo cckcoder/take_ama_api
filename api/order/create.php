@@ -24,6 +24,8 @@
     $order->amaId = $data->amaId;
     $order->userType = 1;
     $order->userId = $data->amaId;
+    $order->amaLat = $data->amaLat;
+    $order->amaLong = $data->amaLong;
 
     if ($order->create()) 
     {
