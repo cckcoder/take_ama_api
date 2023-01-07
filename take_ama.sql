@@ -48,6 +48,20 @@ CREATE TABLE `order_transection` (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `order_transection` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `careTakerId` int(11) NOT NULL,
+  `hours` int(5) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `status` int(5) NOT NULL DEFAULT 0,
+  `amaId` int(11) NOT NULL,
+  `amaLat` decimal(10,8) NOT NULL,
+  `amaLong` decimal(10,8) NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) 
+
 CREATE TABLE `order_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` int(5) NOT NULL,
