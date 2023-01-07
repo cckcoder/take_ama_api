@@ -87,6 +87,8 @@
                     p2.firstName as 'careTaker',
                     ot.hours,
                     ot.price,
+                    ot.amaLat,
+                    ot.amaLong,
                     p.firstName as 'amaName',
                     o.description as 'orderStatus'
                 FROM {$this->table} as ot
@@ -113,6 +115,8 @@
                 $this->hours = $row['hours'];
                 $this->price = $row['price'];
                 $this->amaName = $row['amaName'];
+                $this->amaLat = $row['amaLat'];
+                $this->amaLong = $row['amaLong'];
                 $this->orderStatus = $row['orderStatus'];
             }
             else

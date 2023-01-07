@@ -29,6 +29,8 @@
             'hours' => $order->hours,
             'price' => $order->price,
             'amaName' => $order->amaName,
+            'amaLat' => $order->amaLat,
+            'amaLong' => $order->amaLong,
             'orderStatus' => $order->orderStatus
         );
 
