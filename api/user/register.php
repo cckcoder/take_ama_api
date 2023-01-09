@@ -26,6 +26,7 @@
     // Profile
     $user->firstName = $data->firstName;
     $user->lastName = $data->lastName;
+    $user->taxId = $data->taxId;
     $user->detail = $data->detail;
     $user->birthDay = $data->birthDay;
 
@@ -41,8 +42,10 @@
             'lastName' => $user->lastName,
             'lastName' => $user->detail,
             'birthDay' => $user->birthDay,
+            'taxId' => $user->taxId,
             'isActive' => $user->isActive
         );
+
         echo json_encode(
             array(
                 'message' => 'User Create',

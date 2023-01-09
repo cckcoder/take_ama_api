@@ -37,6 +37,7 @@
                 'lastName' => $lastName,
                 'detail' => $detail,
                 'birthDay' => $birthDay,
+                'taxId' => $taxId,
                 'isActive' => $isActive,
             );
 

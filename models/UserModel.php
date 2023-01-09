@@ -18,6 +18,7 @@
         public $lastName;
         public $detail;
         public $birthDay;
+        public $taxId;
 
 
         // Constructor with DB
@@ -39,6 +40,7 @@
                     p.lastName,
                     p.detail,
                     p.birthDay,
+                    p.taxId,
                     p.isActive
                 from user as u
                 left join profile as p
@@ -147,6 +149,7 @@
                     lastName = :lastName,
                     detail = :detail,
                     birthDay = :birthDay,
+                    taxId = :taxId,
                     user_id = :user_id";
 
             // Prepare statement
@@ -156,11 +159,14 @@
             $this->lastName = htmlspecialchars(strip_tags($this->lastName));
             $this->detail = htmlspecialchars(strip_tags($this->detail));
             $this->birthDay = htmlspecialchars(strip_tags($this->birthDay));
+            $this->taxId = htmlspecialchars(strip_tags($this->taxId));
+
             // Bind data
             $stmt2->bindParam(':firstName', $this->firstName);
             $stmt2->bindParam(':lastName', $this->lastName);
             $stmt2->bindParam(':detail', $this->detail);
             $stmt2->bindParam(':birthDay', $this->birthDay);
+            $stmt2->bindParam(':taxId', $this->taxId);
             $stmt2->bindParam(':user_id', $user_id);
 
             if ($stmt2->execute())
