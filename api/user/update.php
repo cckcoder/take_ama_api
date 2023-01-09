@@ -25,6 +25,7 @@
     $user->lastName = $data->lastName;
     $user->detail = $data->detail;
     $user->birthDay = $data->birthDay;
+    $user->taxId = $data->taxId;
 
     if ($user->update_profile())
     {

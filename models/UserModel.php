@@ -68,6 +68,7 @@
                     p.lastName,
                     p.detail,
                     p.birthDay,
+                    p.taxId,
                     p.isActive
                 from user as u
                 left join profile as p
@@ -93,6 +94,7 @@
                 $this->lastName = $row['lastName'];
                 $this->detail = $row['detail'];
                 $this->birthDay = $row['birthDay'];
+                $this->taxId = $row['taxId'];
                 $this->isActive = $row['isActive'];
             }
             else
@@ -188,7 +190,8 @@
                     firstName = :firstName,
                     lastName = :lastName,
                     detail = :detail,
-                    birthDay = :birthDay
+                    birthDay = :birthDay,
+                    taxId = :taxId
                 WHERE
                     user_id = :user_id";
 
@@ -200,6 +203,7 @@
             $this->lastName = htmlspecialchars(strip_tags($this->lastName));
             $this->detail = htmlspecialchars(strip_tags($this->detail));
             $this->birthDay = htmlspecialchars(strip_tags($this->birthDay));
+            $this->taxId = htmlspecialchars(strip_tags($this->taxId));
             $this->id = htmlspecialchars(strip_tags($this->id));
 
             // Bind data
@@ -207,6 +211,7 @@
             $stmt->bindParam(':lastName', $this->lastName);
             $stmt->bindParam(':detail', $this->detail);
             $stmt->bindParam(':birthDay', $this->birthDay);
+            $stmt->bindParam(':taxId', $this->taxId);
             $stmt->bindParam(':user_id', $this->id);
 
             // Execute query

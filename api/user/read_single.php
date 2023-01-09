@@ -25,12 +25,13 @@
         $user_arr = array(
             'id' => $user->id,
             'username' => $user->username,
-            'email' => $user->email,
+            'email'    => $user->email,
             'userType' => $user->userType,
             'firstName' => $user->firstName,
             'lastName' => $user->lastName,
             'lastName' => $user->detail,
             'birthDay' => $user->birthDay,
+            'taxId'    => $user->taxId,
             'isActive' => $user->isActive
         );
         // Turn to JSON & output
